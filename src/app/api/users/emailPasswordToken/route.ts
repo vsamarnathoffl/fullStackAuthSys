@@ -5,17 +5,17 @@ import { sendEmail } from "@/helpers/mailer";
 
 connect();
 
-export async function POST(request: any) {
+export async function POST(request: NextRequest) {
   try {
-    const reqBody: any = await request.json();
+    const reqBody= await request.json();
     const { email } = reqBody;
 
-    const user: any = await User.findOne({ email });
+    const user= await User.findOne({ email });
     if (!user) {
       return NextResponse.json({ error: "Invalid Email" }, { status: 400 });
     }
 
-    const userId: any = user._id;
+    const userId= user._id;
 
     await sendEmail({ email, emailType: "RESET", userId } as any);
 
@@ -23,8 +23,8 @@ export async function POST(request: any) {
       { message: "Token is sent to mail successfully" },
       { status: 200 }
     );
-  } catch (error: any) {
-    console.log(error);
+  } catch (error) {
+    console.log(error)
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }

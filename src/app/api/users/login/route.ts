@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
         httpOnly:true
     });
     return response;
-  } catch (error: any) {
+  } catch (error) {
     console.log(error);
     return NextResponse.json(
         {error:"Something went wrong while processing user authentication"},

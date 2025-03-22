@@ -4,12 +4,12 @@ import User from "@/models/userModel";
 
 connect();
 
-export async function POST(request: any) {
+export async function POST(request: NextRequest) {
   try {
-    const reqBody: any = await request.json();
+    const reqBody= await request.json();
     const { token } = reqBody;
 
-    const user: any = await User.findOne({
+    const user= await User.findOne({
       forgotPasswordToken: token,
       forgotPasswordTokenExpiry: { $gt: Date.now() },
     });
@@ -27,7 +27,7 @@ export async function POST(request: any) {
       { message: "Ready to change password" },
       { status: 200 }
     );
-  } catch (error: any) {
+  } catch (error) {
     console.log(error);
     return NextResponse.json(
       { message: "Something went wrong" },

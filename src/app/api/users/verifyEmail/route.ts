@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
       message: "Email verified successfully",
       success: true,
     });
-  } catch (error: any) {
+  } catch (error:any) {
     return NextResponse.json({ error: error.message ,success:false}, { status: 500 });
   }
 }

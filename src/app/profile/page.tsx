@@ -15,23 +15,21 @@ export default function ProfilePage() {
       await axios.get("/api/users/logout");
       toast.success("Logged out successfully!");
       router.push("/login");
-    } catch (error: any) {
+    } catch (error) {
       console.log(error);
       toast.error("Unsuccessful logout");
     }
   };
-  useEffect(() => {
-    const dataFromUser = async () => {
-      try {
-        const response:any = await axios.get("/api/users/me");
-        const {username,email} = response.data.user;
-        setUser({ ...user, username,email });
-      } catch (error:any) {
-        console.log(error);
-      }
-    };
-    dataFromUser();
-  }, []);
+  const dataFromUser = async () => {
+    try {
+      const response:any = await axios.get("/api/users/me");
+      const {username,email} = response.data.user;
+      setUser({ ...user, username,email });
+    } catch (error) {
+      console.log(error);
+    }
+   };
+  dataFromUser();
   return (
     <div className="flex h-screen w-full items-center justify-center">
       <div className="flex flex-col gap-2 text-center">

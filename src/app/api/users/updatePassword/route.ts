@@ -1,4 +1,3 @@
-import { getDataFromToken } from "@/helpers/getDataFromToken";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
@@ -24,7 +23,7 @@ export async function POST(request: NextRequest) {
         status: 200,
       }
     );
-  } catch (error: any) {
+  } catch (error) {
     console.log(error);
     return NextResponse.json(
       {

@@ -22,7 +22,7 @@ export default function LoginPage(){
         console.log(response);
         toast.success("LoggedIn Successfully",{duration:500});
         setTimeout(()=>{router.push("/profile")},500)
-      } catch (error: any) {
+      } catch (error:any) {
         if(error.response.status===404){
           toast.error(error.response.data.error)
         }else if(error.response.status===401){

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-export default function forgotPassword() {
+export default function ForgotPassword() {
   const [loading,setLoading] = useState(false);  
   const [nextVerify,setNextVerify] = useState(false);
   const [sendButton,setSendButton] = useState(false);
