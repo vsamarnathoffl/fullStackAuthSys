@@ -1,14 +1,15 @@
 import jwt from "jsonwebtoken";
-import { NextRequest} from "next/server";
+import { NextRequest } from "next/server";
 
 export const getDataFromToken = async (request: NextRequest) => {
-  try {
-    const token = request.cookies.get("token")?.value || "";
+  const token = request.cookies.get("token")?.value;
 
-    const data: any = jwt.verify(token, process.env.TOKEN_SECRET!);
-    const decodedTokenId = data.id;
-    return decodedTokenId;
-  } catch (error: any) {
-    throw new Error(error.message);
+  if (!token) {
+    return null; // Token not found
   }
+
+  const data: any = jwt.verify(token, process.env.TOKEN_SECRET!);
+  const decodedTokenId = data.id;
+
+  return decodedTokenId;
 };
