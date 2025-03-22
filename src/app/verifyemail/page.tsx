@@ -1,7 +1,6 @@
 "use client";
 
 import axios from "axios";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -21,7 +20,7 @@ export default function VerifyEmailPage() {
 
   const onVerify = async()=>{
     try{
-        const response= await axios.post("/api/users/verifyEmail",{token});
+        const response:any= await axios.post("/api/users/verifyEmail",{token});
         console.log(response);
         if(response.data.success){
             toast.success("Email is verified successfully!");
@@ -31,6 +30,7 @@ export default function VerifyEmailPage() {
             toast.error(response.data.message,{duration:30000});
         }
     }catch(error:any){
+        console.log(error);
         if(error.response.status===400)
         toast.error("Invalid token. Please enter a valid token.", {
           duration: 30000,

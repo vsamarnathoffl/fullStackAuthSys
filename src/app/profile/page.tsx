@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import React, { useState, useEffect } from "react";
-import { setDefaultResultOrder } from "dns";
+
 export default function ProfilePage() {
   const [user, setUser] = useState({
     username: "",
@@ -23,10 +23,10 @@ export default function ProfilePage() {
   useEffect(() => {
     const dataFromUser = async () => {
       try {
-        const response = await axios.get("/api/users/me");
+        const response:any = await axios.get("/api/users/me");
         const {username,email} = response.data.user;
         setUser({ ...user, username,email });
-      } catch (error) {
+      } catch (error:any) {
         console.log(error);
       }
     };
