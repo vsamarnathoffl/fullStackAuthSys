@@ -27,7 +27,11 @@ export default function SignupPage() {
       console.log("Signup success", response.data);
       toast.success("Successfully SignedUp",{duration:1000});
       // setTimeout(() => router.push("/login"), 1000);
-      setTimeout(() => router.push("/verifyemail"), 1000);
+      setTimeout(() => {
+        console.log("Redirecting to /verifyemail...");
+        router.push("/verifyemail");
+      }, 1000);
+
     } catch (error: any) {
       if(error.response.status===409){
         toast.error("User Already Exists",{duration:2000});
