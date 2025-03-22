@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 export default function ForgotPassword() {
-  const [loading,setLoading] = useState(false);  
-  const [nextVerify,setNextVerify] = useState(false);
-  const [sendButton,setSendButton] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [nextVerify, setNextVerify] = useState(false);
+  const [sendButton, setSendButton] = useState(false);
   const [email, setEmail] = useState("");
   const [verify, setVerify] = useState(false);
   const [token, setToken] = useState("");
@@ -16,8 +16,9 @@ export default function ForgotPassword() {
   const [matchPassword, setMatchPassword] = useState(false);
   const router = useRouter();
   const [verifyButtonDisabled, setVerifyButtonDisabled] = useState(false);
+
   useEffect(() => {
-    if (token.length > 0 && token.trim() !== "") {
+    if (token.trim() !== "") {
       setVerifyButtonDisabled(false);
     } else {
       setVerifyButtonDisabled(true);
@@ -34,15 +35,15 @@ export default function ForgotPassword() {
     } else {
       setMatchPassword(false);
     }
-  }, [confirmPassword]);
+  }, [confirmPassword, password]);
 
-  useEffect(()=>{
-    if(email.trim()!==""&& email.length>0){
-        setSendButton(true);
-    }else{
-        setSendButton(false);
+  useEffect(() => {
+    if (email.trim() !== "") {
+      setSendButton(true);
+    } else {
+      setSendButton(false);
     }
-  },[email])
+  }, [email]);
 
   const onVerify = async () => {
     try {
@@ -57,35 +58,35 @@ export default function ForgotPassword() {
       } else {
         toast.error("Something went wrong");
       }
-    }finally{
-        setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const onSendEmail = async() =>{
-    try{
-        setLoading(true);
-        await axios.post("api/users/emailPasswordToken",{email})
-        toast.success("Token is sent to mail, check it.")
-        setNextVerify(true);
-    }catch(error:any){
-        if(error.response.status===400){
-            toast.error("Email is incorrect");
-        }else{
-            toast.error("Server Error");
-        }
-    }finally{
-        setLoading(false);
+  const onSendEmail = async () => {
+    try {
+      setLoading(true);
+      await axios.post("api/users/emailPasswordToken", { email });
+      toast.success("Token is sent to mail, check it.");
+      setNextVerify(true);
+    } catch (error: any) {
+      if (error.response.status === 400) {
+        toast.error("Email is incorrect");
+      } else {
+        toast.error("Server Error");
+      }
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   const onReset = async () => {
     try {
-        setLoading(true);
+      setLoading(true);
       setPassword(password.trim());
       setConfirmPassword(password.trim());
       if (password === confirmPassword) {
-        await axios.post("/api/users/updatePassword", { email,password });
+        await axios.post("/api/users/updatePassword", { email, password });
         toast.success("Password is updated successfully");
         router.push("/login");
       } else {
@@ -93,8 +94,8 @@ export default function ForgotPassword() {
       }
     } catch (error: any) {
       toast.error(error.response.data.error);
-    }finally{
-        setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -183,13 +184,12 @@ export default function ForgotPassword() {
             readOnly={!verify}
           />
           <label htmlFor="confirm" className="text-sm">
-            Confirm Password 
+            Confirm Password{" "}
             {verify && confirmPassword.trim() !== ""
               ? matchPassword
                 ? " ( Matched )"
                 : " ( Not Matched )"
               : ""}
-            
           </label>
           <input
             type="password"
@@ -208,7 +208,7 @@ export default function ForgotPassword() {
             readOnly={!verify}
           />
           <button
-            className={`bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition  ${
+            className={`bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition ${
               matchPassword ? "cursor-pointer" : "cursor-not-allowed"
             }`}
             disabled={!matchPassword}

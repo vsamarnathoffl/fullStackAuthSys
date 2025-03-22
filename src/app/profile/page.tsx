@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function ProfilePage() {
   const [user, setUser] = useState({
