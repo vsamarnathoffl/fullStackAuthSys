@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Full-Stack Authentication System with MongoDB in Next.js
 
-## Getting Started
+A comprehensive authentication system built using Next.js, MongoDB, Nodemailer, and Mailtrap. This project provides user registration, login, password reset, and email verification functionalities with a clean and efficient architecture.
 
-First, run the development server:
+## Project Overview
+This authentication system allows users to securely register, log in, verify their email addresses, and reset their passwords. The application uses JWT for session management and integrates Nodemailer with Mailtrap for email handling.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
+- User Registration with Email Verification
+- User Login & JWT-based Authentication
+- Password Reset Functionality
+- Email Sending via Nodemailer and Mailtrap
+- Data Persistence with MongoDB
+- Server-Side & API Route Handling via Next.js
+- Secure Password Hashing with bcrypt
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
+- **Frontend:** Next.js, Tailwind CSS
+- **Backend:** Node.js, MongoDB
+- **Email Handling:** Nodemailer, Mailtrap
+- **Security:** bcrypt, JWT
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How to Run the Project
+1. Clone the repository.
+2. Navigate to the project folder and install dependencies:
+   ```sh
+   npm install
+   ```
+3. Set up environment variables in a `.env` file:
+   ```sh
+   MONGO_URI=<Your MONGO_URI>
+   TOKEN_SECRET=<Your TOKEN_SECRET>
+   USER=<Your USER>
+   PASS=<Your PASS>
+   ```
+4. Start the development server:
+   ```sh
+   npm run dev
+   ```
+5. Open your browser and visit `http://localhost:3000` to use the app.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## API Endpoints
+- `/login` - User Login
+- `/signup` - User Registration
+- `/verifyemail` - Email Verification
+- `/forgotPassword` - Password Reset Request
+- `/profile` - User Profile
 
-## Learn More
+## Future Improvements
+- Implement Role-Based Access Control (RBAC)
+- Add OAuth2 / Social Login Integration
+- Enhance Security with Rate Limiting
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+This project is licensed under the MIT License.
